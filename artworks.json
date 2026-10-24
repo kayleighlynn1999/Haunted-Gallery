@@ -1,0 +1,81 @@
+[
+  {
+    "id": "last-door",
+    "title": "The Last Door",
+    "artist": "The Haunted Gallery \u2014 original digital study",
+    "year": 2026,
+    "type": "Digital Art",
+    "image": "assets/last-door.svg",
+    "description": "A faint red light leaks into an empty corridor. The door is open, but nobody remembers unlocking it.",
+    "medium": "Digital illustration",
+    "featured": true,
+    "alt": "Dark violet hallway with a glowing, mysterious doorway"
+  },
+  {
+    "id": "where-trees-watch",
+    "title": "Where the Trees Watch",
+    "artist": "The Haunted Gallery \u2014 original digital study",
+    "year": 2026,
+    "type": "Illustration",
+    "image": "assets/where-trees-watch.svg",
+    "description": "A walk through a forest where the branches lean toward every sound.",
+    "medium": "Atmospheric illustration",
+    "alt": "A mysterious night forest with twisted silhouettes"
+  },
+  {
+    "id": "no-one-answered",
+    "title": "No One Answered",
+    "artist": "The Haunted Gallery \u2014 original digital study",
+    "year": 2026,
+    "type": "Digital Art",
+    "image": "assets/no-one-answered.svg",
+    "description": "Some phones keep ringing long after the line has gone quiet.",
+    "medium": "Digital illustration",
+    "alt": "An eerie phone-themed digital composition in deep shadows"
+  },
+  {
+    "id": "static-in-the-hall",
+    "title": "Static in the Hall",
+    "artist": "The Haunted Gallery \u2014 original digital study",
+    "year": 2026,
+    "type": "Motion",
+    "image": "assets/static-in-the-hall.jpg",
+    "video": "assets/static-in-the-hall.mp4",
+    "description": "A five-second motion study of an empty corridor. Watch the doorway closely.",
+    "medium": "Silent short video (5 seconds)",
+    "alt": "A dark corridor with an ominous illuminated doorway"
+  },
+  {
+    "id": "window-upstairs",
+    "title": "The Window Upstairs",
+    "artist": "The Haunted Gallery \u2014 original digital study",
+    "year": 2026,
+    "type": "Illustration",
+    "image": "assets/window-upstairs.svg",
+    "description": "One upstairs light stays on even though the house has been empty for years.",
+    "medium": "Digital illustration",
+    "alt": "A glowing upper-story window in a dark mysterious setting"
+  },
+  {
+    "id": "below-the-surface",
+    "title": "Below the Surface",
+    "artist": "The Haunted Gallery \u2014 original digital study",
+    "year": 2026,
+    "type": "Digital Art",
+    "image": "assets/below-the-surface.svg",
+    "description": "At the bottom of the flooded stairwell, a light has started to glow again.",
+    "medium": "Digital illustration",
+    "alt": "Abstract shadows and underwater shapes in a deep blue scene"
+  },
+  {
+    "id": "the-watcher",
+    "title": "The Watcher",
+    "artist": "The Haunted Gallery \u2014 original digital study",
+    "year": 2026,
+    "type": "Digital Art",
+    "image": "assets/the-watcher.svg",
+    "description": "There is a moment when looking turns into being seen.",
+    "medium": "Abstract digital illustration",
+    "alt": "A surreal abstract eye gazing from a dark composition"
+  }
+]

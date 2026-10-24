@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0e0d14" />
+    <meta name="description" content="The Haunted Gallery is an interactive digital exhibition of original eerie illustrations and a short motion artwork." />
+    <title>The Haunted Gallery | A Digital Art Experience</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="app" v-cloak>
+      <header class="site-header">
+        <div class="header-inner container-fluid">
+          <a href="#/home" class="brand" @click="closeMenu">
+            <span class="brand-symbol" aria-hidden="true">✳</span>
+            <span>THE HAUNTED<br />GALLERY</span>
+          </a>
+          <button class="menu-btn" type="button" @click="navOpen = !navOpen" aria-controls="site-nav" :aria-expanded="String(navOpen)">
+            Menu <span aria-hidden="true">☰</span>
+          </button>
+          <nav id="site-nav" aria-label="Main navigation" :class="{open: navOpen}">
+            <a href="#/home" :class="{current: screen === 'home'}" @click="closeMenu">Home</a>
+            <a href="#/gallery" :class="{current: screen === 'gallery'}" @click="closeMenu">The collection</a>
+            <a href="#/about" :class="{current: screen === 'about'}" @click="closeMenu">About</a>
+          </nav>
+          <span class="issue-num">EXHIBITION 01 / 2026</span>
+        </div>
+      </header>
+
+      <main id="main">
+        <template v-if="screen === 'home'">
+          <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-copy">
+              <p class="eyebrow"><span class="small-star" aria-hidden="true">✦</span> AN ONLINE ART EXPERIENCE</p>
+              <h1 id="hero-title">Some things<br />are better left<br /><em>unseen.</em></h1>
+              <p class="hero-sub">A collection of strange places, unexplained moments, and the stories hiding just outside the light.</p>
+              <a class="primary-link" href="#/gallery">Enter the gallery <span aria-hidden="true">↗</span></a>
+              <div class="hero-foot"><span>CURATED AFTER DARK</span><span>SCROLL TO EXPLORE ↓</span></div>
+            </div>
+            <div class="hero-art">
+              <img src="assets/last-door.svg" alt="A glowing doorway at the end of a dark hall" fetchpriority="high" />
+              <span class="art-number">01 / 07</span>
+              <div class="hero-art-label"><span>FEATURED WORK</span><strong>THE LAST DOOR</strong></div>
+            </div>
+          </section>
+          <div class="ticker" aria-label="Gallery categories">
+            <span>ILLUSTRATION</span><b aria-hidden="true">✧</b><span>DIGITAL ART</span><b aria-hidden="true">✧</b>
+            <span>MOTION</span><b aria-hidden="true">✧</b><span>STORIES IN THE DARK</span><b aria-hidden="true">✧</b>
+          </div>
+        </template>
+
+        <section v-if="screen === 'home' || screen === 'gallery'" class="collection page-section" aria-labelledby="collection-title">
+          <div class="section-overline">THE COLLECTION <span aria-hidden="true">✧</span> VOLUME 01</div>
+          <div class="collection-top">
+            <div><p class="eyebrow">THINGS YOU WEREN'T SUPPOSED TO FIND</p><h2 id="collection-title">Explore the <em>collection.</em></h2></div>
+            <p>Every piece has a story. Select an artwork to take a closer look, or filter the gallery to find your favorite kind of strange.</p>
+          </div>
+          <div class="gallery-tools">
+            <div class="filter-list d-flex flex-wrap" role="group" aria-label="Filter artwork by type">
+              <button v-for="category in categories" :key="category" type="button" :class="{selected: filter === category}" :aria-pressed="String(filter === category)" @click="filter = category">{{ category }}</button>
+            </div>
+            <label class="search-field">
+              <span aria-hidden="true">⌕</span><span class="sr-only">Search the artwork gallery</span>
+              <input v-model="search" type="search" placeholder="Search the gallery..." autocomplete="off" />
+            </label>
+          </div>
+          <div class="result-line" aria-live="polite">SHOWING <span>{{ visibleArtworks.length }} {{ visibleArtworks.length === 1 ? 'WORK' : 'WORKS' }}</span><span aria-hidden="true">✧</span> SELECT A PIECE TO VIEW</div>
+          <p v-if="loading" class="gallery-status" role="status">Loading the exhibition…</p>
+          <p v-else-if="error" class="gallery-status error" role="alert">{{ error }}</p>
+          <div v-else-if="visibleArtworks.length" class="art-grid">
+            <artwork-card v-for="(art, i) in visibleArtworks" :key="art.id" :art="art" :index="i" @select="openArtwork"></artwork-card>
+          </div>
+          <div v-else class="empty-state">Nothing found in this part of the gallery. Try another search or category.</div>
+          <p class="demo-disclosure">Original digital studies and a short silent motion piece created for this student gallery project.</p>
+        </section>
+
+        <section v-if="screen === 'home' || screen === 'about'" class="about-page page-section" aria-labelledby="about-title">
+          <div class="section-overline">THE STORY BEHIND THE EXHIBITION <span aria-hidden="true">✧</span> ABOUT</div>
+          <div class="about-layout">
+            <div><p class="eyebrow">A LITTLE SOMETHING DIFFERENT</p><h2 id="about-title">Art that stays<br />with you <em>afterward.</em></h2></div>
+            <div class="about-copy">
+              <p>The Haunted Gallery is a student digital art project inspired by horror movies, mystery, and visual storytelling. It brings together digital illustrations and a short experimental motion piece.</p>
+              <p>Instead of putting all the images on one long page, visitors can search, filter by type, and open any piece to learn more. The site works on phones, tablets, and larger screens without requiring a full page reload.</p>
+              <a href="#/gallery" class="text-link">Browse the artwork <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+          <div class="about-notes">
+            <div><span>01</span><strong>DISCOVER</strong><p>Browse original spooky artwork in one digital gallery.</p></div>
+            <div><span>02</span><strong>LOOK CLOSER</strong><p>Open any piece to see its story and details.</p></div>
+            <div><span>03</span><strong>EXPLORE</strong><p>Filter and search without leaving the page.</p></div>
+          </div>
+        </section>
+
+        <section v-if="screen === 'not-found'" class="not-found page-section">
+          <h1>Lost in the dark?</h1><p>This page doesn't seem to exist.</p><a href="#/home">Return home →</a>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <a href="#/home" class="footer-title">THE HAUNTED GALLERY <span aria-hidden="true">✳</span></a>
+        <div><span>AN EXPERIMENT IN DIGITAL STORYTELLING</span><span>INDIVIDUAL DIGITAL MEDIA PROJECT · 2026</span></div>
+      </footer>
+
+      <div v-if="selectedArtwork" class="modal-backdrop" @click.self="closeArtwork" @keydown.esc="closeArtwork">
+        <section class="detail-modal" role="dialog" aria-modal="true" aria-labelledby="detail-title" aria-describedby="detail-description">
+          <button ref="closeButton" type="button" class="detail-close" @click="closeArtwork" aria-label="Close artwork details">✕</button>
+          <div class="modal-art">
+            <video v-if="selectedArtwork.video" :key="selectedArtwork.id" controls playsinline preload="none" :poster="selectedArtwork.image" :aria-label="selectedArtwork.title + ' motion artwork'">
+              <source :src="selectedArtwork.video" type="video/mp4" />Your browser does not support MP4 video.
+            </video>
+            <img v-else :src="selectedArtwork.image" :alt="selectedArtwork.alt || selectedArtwork.title" />
+          </div>
+          <div class="detail-copy">
+            <p class="eyebrow">{{ selectedArtwork.type }} / {{ selectedArtwork.year }}</p>
+            <h2 id="detail-title">{{ selectedArtwork.title }}</h2>
+            <p id="detail-description" class="detail-description">{{ selectedArtwork.description }}</p>
+            <dl>
+              <div><dt>CREATOR</dt><dd>{{ selectedArtwork.artist }}</dd></div>
+              <div><dt>MEDIUM</dt><dd>{{ selectedArtwork.medium }}</dd></div>
+            </dl>
+            <button type="button" class="text-link close-text" @click="closeArtwork">← Back to the gallery</button>
+          </div>
+        </section>
+      </div>
+    </div>
+    <script src="vendor/vue.global.prod.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
